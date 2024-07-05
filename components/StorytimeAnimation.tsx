@@ -19,7 +19,6 @@ const Storytime = ({ story }: { story: string | null }) => {
         <h1 className="disappear">STORY TIME</h1>
       ) : (
         <div className="story-container appear">
-          <h2>Once upon a time...</h2>
           <p>{story}</p>
         </div>
       )}

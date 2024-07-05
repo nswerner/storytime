@@ -29,13 +29,13 @@ export default function RootLayout({
       >
         <header className="w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex"></header>
         <main className="background">
-          <div id="stars"></div>
-          <div id="stars2"></div>
-          <div id="stars3"></div>
-          <div id="title">
-            {children}
-            <br />
-          </div>
+          <div className="cluster1"></div>
+          <div className="cluster2"></div>
+          <div className="cluster3"></div>
+          <div className="stars1"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+          <div className="content">{children}</div>
         </main>
       </body>
     </html>
