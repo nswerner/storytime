@@ -1,43 +1,24 @@
-'use client';
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import OpenAI from 'openai';
+import Storytime from '@/components/StorytimeAnimation';
 
-const Storytime = () => {
-  const [showTitle, setShowTitle] = useState(true);
+const StorytimeContainer = async () => {
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const completion = await openai.chat.completions.create({
+    messages: [
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: 'Who won the world series in 2020?' },
+      {
+        role: 'assistant',
+        content: 'The Los Angeles Dodgers won the World Series in 2020.',
+      },
+      { role: 'user', content: 'Where was it played?' },
+    ],
+    model: 'gpt-3.5-turbo',
+  });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowTitle(false);
-    }, 3000);
+  const story = completion?.choices[0]?.message?.content;
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <div>
-      {showTitle ? (
-        <h1 className="disappear">STORY TIME</h1>
-      ) : (
-        <div className="story-container appear">
-          <h2>Once upon a time...</h2>
-          <p>
-            There was a developer who wanted to create a storybook. They used
-            Storybook to create a collection of components that told a story.
-          </p>
-          <p>
-            The developer used Storybook to document the components and share
-            them with their team. They used Storybook to test the components in
-            isolation and ensure they worked as expected.
-          </p>
-          <br />
-          <p>
-            The developer was happy with the storybook they created. They shared
-            it with the world and everyone lived happily ever after.
-          </p>
-        </div>
-      )}
-    </div>
-  );
+  return <Storytime story={story} />;
 };
 
-export default Storytime;
+export default StorytimeContainer;
