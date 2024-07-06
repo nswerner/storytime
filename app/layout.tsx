@@ -22,6 +22,7 @@ export default function RootLayout({
         <title>Storytime</title>
       </head>
       <body
+        suppressHydrationWarning={true}
         className={
           inter.className +
           ' flex min-h-screen flex-col items-center justify-between p-24'
