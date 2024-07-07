@@ -6,6 +6,7 @@ import Storytime from '@/app/components/StorytimeAnimation';
 import Question from '@/app/components/Question';
 import Story from '@/app/components/Story';
 import Button from '@/app/components/Button';
+import FALLBACK_STORY from '@/app/constants/FALLBACK_STORY';
 import {
   LIFEFORM_OPTIONS,
   PROFESSION_OPTIONS,
@@ -34,7 +35,9 @@ const StoryElements = () => {
           response.json().then((story) => {
             setStory(story);
           });
-        } // TODO: handle error with app that could story
+        } else {
+          setStory(FALLBACK_STORY);
+        }
       });
     }
   }, [questionIndex, name, lifeform, profession, setting, goal]);
