@@ -6,16 +6,20 @@ import Storytime from '@/app/components/StorytimeAnimation';
 import Question from '@/app/components/Question';
 import Story from '@/app/components/Story';
 import Button from '@/app/components/Button';
+import {
+  LIFEFORM_OPTIONS,
+  PROFESSION_OPTIONS,
+  SETTING_OPTIONS,
+  GOAL_OPTIONS,
+} from '@/app/constants/STORY_ELEMENT_OPTIONS';
 
 const StoryElements = () => {
   const [story, setStory] = useState('');
   const [name, setName] = useState('');
-  const [lifeform, setLifeform] = useState('human');
-  const [profession, setProfession] = useState('princess');
-  const [setting, setSetting] = useState('underwater');
-  const [goal, setGoal] = useState(
-    'to teach a grumpy ogre how to dance at the village festival.'
-  );
+  const [lifeform, setLifeform] = useState('');
+  const [profession, setProfession] = useState('');
+  const [setting, setSetting] = useState('');
+  const [goal, setGoal] = useState('');
   const [questionIndex, setQuestionIndex] = useState(0);
 
   useEffect(() => {
@@ -30,7 +34,7 @@ const StoryElements = () => {
           response.json().then((story) => {
             setStory(story);
           });
-        }
+        } // TODO: handle error with app that could story
       });
     }
   }, [questionIndex, name, lifeform, profession, setting, goal]);
@@ -47,7 +51,7 @@ const StoryElements = () => {
   const QUESTIONS = [
     {
       get: () => name,
-      prompt: 'What is the name of the main character in our story?',
+      prompt: 'What is the name of our stories hero?',
       id: 'question-0',
       element: (
         <input
@@ -62,7 +66,7 @@ const StoryElements = () => {
     },
     {
       get: () => lifeform,
-      prompt: 'What type of lifeform are they?',
+      prompt: 'What type of organism are they?',
       id: 'question-1',
       element: (
         <select
@@ -74,14 +78,15 @@ const StoryElements = () => {
           }}
           onKeyDown={(event) => lifeform && handleKeyDown(event)}
         >
-          <option value="human">Human</option>
-          <option value="alien">Alien</option>
-          <option value="robot">Robot</option>
-          <option value="fox">Fox</option>
-          <option value="dinosaur">Dinosaur</option>
-          <option value="elf">Elf</option>
-          <option value="unicorn">Unicorn</option>
-          <option value="puppy">Puppy</option>
+          {LIFEFORM_OPTIONS.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              disabled={option.disabled}
+            >
+              {option.label}
+            </option>
+          ))}
         </select>
       ),
     },
@@ -99,14 +104,15 @@ const StoryElements = () => {
           }}
           onKeyDown={(event) => profession && handleKeyDown(event)}
         >
-          <option value="princess">Princess</option>
-          <option value="pirate">Pirate</option>
-          <option value="astronaut">Astronaut</option>
-          <option value="superhero">Superhero</option>
-          <option value="ninja">Ninja</option>
-          <option value="wizard">Wizard</option>
-          <option value="spy">Spy</option>
-          <option value="detective">Detective</option>
+          {PROFESSION_OPTIONS.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              disabled={option.disabled}
+            >
+              {option.label}
+            </option>
+          ))}
         </select>
       ),
     },
@@ -124,56 +130,42 @@ const StoryElements = () => {
           }}
           onKeyDown={(event) => setting && handleKeyDown(event)}
         >
-          <option value="underwater">Underwater</option>
-          <option value="futuristic city">Futuristic City</option>
-          <option value="enchanted forest">Enchanted Forest</option>
-          <option value="outerspace">Outerspace</option>
-          <option value="ancient ruins">Ancient Ruins</option>
-          <option value="magical school">Magical School</option>
-          <option value="sky city made of clouds and floating platforms">
-            Sky City
-          </option>
-          <option value="ice kingdom">Ice Kingdom</option>
+          {SETTING_OPTIONS.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              disabled={option.disabled}
+            >
+              {option.label}
+            </option>
+          ))}
         </select>
       ),
     },
     {
       get: () => goal,
-      prompt: 'What is the goal of the main character?',
+      prompt: 'What is the goal of our hero?',
       id: 'question-4',
       element: (
         <select
           id="question-4"
-          className="question-input"
+          className="question-input h-24 text-wrap"
           value={goal}
+          defaultValue={goal}
           onChange={(event: ChangeEvent<HTMLSelectElement>) => {
             setGoal(event.target.value);
           }}
           onKeyDown={(event) => goal && handleKeyDown(event)}
         >
-          <option value="to teach a grumpy ogre how to dance at the village festival.">
-            To teach a grumpy ogre how to dance at the village festival.
-          </option>
-          <option value="to help a mischievous leprechaun return a stolen pot of gold to its rightful owner.">
-            To help a mischievous leprechaun return a stolen pot of gold to its
-            rightful owner.
-          </option>
-          <option value="to rescue a grumpy dragon's lost teddy bear from a treacherous cave.">
-            To rescue a grumpy dragon&apos;s lost teddy bear from a treacherous
-            cave.
-          </option>
-          <option value="to convince a forgetful wizard to remember the spell that can fix a magical mishap.">
-            To convince a forgetful wizard to remember the spell that can fix a
-            magical mishap.
-          </option>
-          <option value="to help a shy mermaid win a singing contest against boastful sea creatures.">
-            To help a shy mermaid win a singing contest against boastful sea
-            creatures.
-          </option>
-          <option value="to organize a surprise birthday party for a grumpy troll who insists on hating birthdays.">
-            To organize a surprise birthday party for a grumpy troll who insists
-            on hating birthdays.
-          </option>
+          {GOAL_OPTIONS.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              disabled={option.disabled}
+            >
+              {option.label}
+            </option>
+          ))}
         </select>
       ),
     },
@@ -189,7 +181,7 @@ const StoryElements = () => {
             disabled={!question.get()}
             onKeyDown={handleKeyDown}
             onClick={() => setQuestionIndex(questionIndex + 1)}
-            text={questionIndex === 5 ? 'Tell me a story!' : 'Next'}
+            text={questionIndex === 4 ? "Let's Read!" : 'Next'}
           />
         </Question>
       ) : (

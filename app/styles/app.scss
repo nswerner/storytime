@@ -1,0 +1,76 @@
+// TODO - Move Star styles to their own file
+// TODO - Move all styles to their own directory
+
+.story-container {
+  letter-spacing: normal;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 50vh;
+  height: fit-content;
+  width: 80%;
+  max-width: 800px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-family: 'lato', sans-serif;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 2rem;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-input {
+  display: block;
+  margin: 0 auto 1rem auto;
+  color: black;
+  padding: 1rem;
+  width: 50%;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  letter-spacing: normal;
+  border-radius: 0.5rem;
+}
+
+.button-glow {
+  background: radial-gradient(circle, rgba(255, 0, 150, 0.1), transparent),
+    radial-gradient(circle, rgba(0, 150, 255, 0.1), transparent),
+    radial-gradient(circle, rgba(255, 150, 0, 0.1), transparent),
+    radial-gradient(circle, rgba(150, 0, 255, 0.1), transparent);
+  color: white;
+  background-size: 200%;
+  background-position: center;
+  text-align: center;
+  box-shadow: 0px 0px 40px rgba(255, 0, 255, 0.25);
+  animation: glow 1s linear infinite;
+}
+
+option {
+  /* Resetting common properties */
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  background-color: white;
+  color: black;
+  line-height: 4rem;
+  font-size: large;
+}
+
+.story-text {
+  padding: 1rem;
+  margin: 1rem;
+}

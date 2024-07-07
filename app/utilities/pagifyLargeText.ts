@@ -1,14 +1,14 @@
 const splitTextIntoPages = (text: string, maxLength: number) => {
-  const words = text.split(/\s+/); // Split the text into words
+  const sentences = text.split('. '); // Split the text into sentences
   const pages = [];
   let currentPage = '';
 
-  for (const word of words) {
-    if ((currentPage + word).length > maxLength) {
+  for (const sentence of sentences) {
+    if ((currentPage + sentence).length > maxLength) {
       pages.push(currentPage.trim());
-      currentPage = word + ' ';
+      currentPage = sentence + '. ';
     } else {
-      currentPage += word + ' ';
+      currentPage += sentence + '. ';
     }
   }
 
