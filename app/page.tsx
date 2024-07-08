@@ -27,10 +27,13 @@ const StoryElements = () => {
 
   useEffect(() => {
     if (questionIndex === 5) {
-      const request = new NextRequest('http://localhost:3000/api/story', {
-        method: 'POST',
-        body: JSON.stringify({ name, lifeform, profession, setting, goal }),
-      });
+      const request = new NextRequest(
+        process.env.NEXT_PUBLIC_SERVER_URL + '/api/story',
+        {
+          method: 'POST',
+          body: JSON.stringify({ name, lifeform, profession, setting, goal }),
+        }
+      );
 
       fetch(request).then((response) => {
         if (response.ok) {

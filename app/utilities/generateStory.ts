@@ -1,7 +1,6 @@
 import OpenAI from 'openai';
 
 export default async function generateStory({
-  //TODO - validate name for injection/prompt hijacking
   name,
   lifeform,
   profession,
