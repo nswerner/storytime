@@ -105,13 +105,15 @@
 }
 
 .loader span {
+  width: fit-content;
   display: block;
-  left: 0;
-  right: 0;
+  left: -20px;
   top: 100%;
+  margin: auto;
   margin-top: 20px;
   text-align: center;
   color: var(--text);
+  position: absolute;
 }
 
 @-webkit-keyframes page-2 {

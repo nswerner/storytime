@@ -20,7 +20,7 @@ const Button = ({
     <button
       className={`${
         disabled ? 'opacity-50' : 'button-glow'
-      } block m-auto border border-white border-1 rounded px-8 py-2`}
+      } block m-auto border border-white border-1 rounded w-1/2 py-1 box-sizing`}
       disabled={disabled}
       type="submit"
       onKeyDown={onKeyDown}

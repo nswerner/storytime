@@ -20,7 +20,8 @@ export default async function generateStory({
         character information and basic story telling elements. Use the information provided
         to create a unique story that is whimsical, fun, and confidence inspiring. Use pixar storytelling
         methods and themes as a reference. The stories should invoke opportunities for children to challenge 
-        their fears while still being safe and light-hearted. All content must be child-friendly, appropriate for ages 4 - 11.`,
+        their fears while still being safe and light-hearted. All content must be child-friendly, appropriate for ages 4 - 11. 
+        Include paragraph breaks where applicable.`,
       },
       {
         role: 'user',
@@ -32,5 +33,5 @@ export default async function generateStory({
     model: 'gpt-3.5-turbo',
   });
 
-  return completion?.choices[0]?.message?.content;
+  return completion?.choices[0]?.message?.content || '';
 }

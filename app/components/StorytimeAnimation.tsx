@@ -2,7 +2,7 @@
 
 import { useState, useEffect, ReactNode } from 'react';
 
-const Storytime = ({ children }: { children: ReactNode }) => {
+const StorytimeAnimation = ({ children }: { children: ReactNode }) => {
   const [showTitle, setShowTitle] = useState(true);
 
   useEffect(() => {
@@ -20,4 +20,4 @@ const Storytime = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default Storytime;
+export default StorytimeAnimation;

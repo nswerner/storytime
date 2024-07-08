@@ -2,7 +2,7 @@
 
 import { NextRequest } from 'next/server';
 import { useState, useCallback, useEffect, ChangeEvent } from 'react';
-import Storytime from '@/app/components/StorytimeAnimation';
+import StorytimeAnimation from '@/app/components/StorytimeAnimation';
 import Question from '@/app/components/Question';
 import Story from '@/app/components/Story';
 import Button from '@/app/components/Button';
@@ -177,7 +177,7 @@ const StoryElements = () => {
   const question = QUESTIONS[questionIndex];
 
   return (
-    <Storytime>
+    <StorytimeAnimation>
       {questionIndex < 5 ? (
         <Question className="appear" question={question}>
           <Button
@@ -190,7 +190,7 @@ const StoryElements = () => {
       ) : (
         <Story story={story} />
       )}
-    </Storytime>
+    </StorytimeAnimation>
   );
 };
 
