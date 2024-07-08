@@ -56,7 +56,7 @@ const StoryElements = () => {
   const QUESTIONS = [
     {
       get: () => name,
-      prompt: 'What is the name of our stories hero?',
+      prompt: "What is the name of our story's hero?",
       id: 'question-0',
       element: (
         <div className="text-input-container">
