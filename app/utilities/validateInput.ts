@@ -1,37 +1,24 @@
-function validate_input(user_input) {
-  // Define a whitelist of acceptable characters (e.g., alphanumeric and basic punctuation)
-  if (!user_input.match(/^[a-zA-Z0-9 ,!']*$/)) {
-    return false;
+const validateCharacters = (input: string): boolean =>
+  /^[a-zA-Z0-9 ,!']*$/.test(input);
+
+const validateLength = (input: string) => input.length <= 25;
+
+const sanitizeInput = (input: string): string => {
+  return input.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
+};
+
+const validateInput = (input: string): string => {
+  const sanitizedInput = sanitizeInput(input);
+
+  if (!validateCharacters(sanitizedInput)) {
+    throw new Error('Invalid characters');
   }
 
-  // Limit input length
-  if (user_input.length > 25) {
-    return false;
+  if (!validateLength(sanitizedInput)) {
+    throw new Error('Oops! Please enter a name less than 25 characters');
   }
 
-  return true;
-}
+  return sanitizedInput;
+};
 
-function sanitize_input(user_input) {
-  // Escape HTML special characters
-  var sanitized = user_input
-    .replace('&', '&amp;')
-    .replace('<', '&lt;')
-    .replace('>', '&gt;');
-
-  return sanitized;
-}
-
-function handle_user_input(user_input) {
-  if (!validate_input(user_input)) {
-    return 'Invalid input. Please try again.';
-  }
-  var sanitized_input = sanitize_input(user_input);
-  // Use the sanitized input in a safe context
-  return sanitized_input;
-}
-
-// Example usage
-var user_input = "<script>alert('hacked');</script>";
-var response = handle_user_input(user_input);
-console.log(response);
+export default validateInput;

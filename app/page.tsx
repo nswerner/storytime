@@ -7,6 +7,7 @@ import Question from '@/app/components/Question';
 import Story from '@/app/components/Story';
 import Button from '@/app/components/Button';
 import FALLBACK_STORY from '@/app/constants/FALLBACK_STORY';
+import validateInput from '@/app/utilities/validateInput';
 import {
   LIFEFORM_OPTIONS,
   PROFESSION_OPTIONS,
@@ -17,6 +18,7 @@ import {
 const StoryElements = () => {
   const [story, setStory] = useState('');
   const [name, setName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [lifeform, setLifeform] = useState('');
   const [profession, setProfession] = useState('');
   const [setting, setSetting] = useState('');
@@ -57,14 +59,28 @@ const StoryElements = () => {
       prompt: 'What is the name of our stories hero?',
       id: 'question-0',
       element: (
-        <input
-          id="question-0"
-          className="question-input"
-          value={name}
-          onKeyDown={(event) => name && handleKeyDown(event)}
-          onChange={({ target: { value } }) => setName(value)}
-          placeholder='e.g. "Princess Sparkle"'
-        />
+        <div className="text-input-container">
+          <div className="error-message">{errorMessage}</div>
+          <input
+            id="question-0"
+            className={`question-input ${errorMessage && 'input-error'}`}
+            value={name}
+            onKeyDown={(event) => name && handleKeyDown(event)}
+            onChange={({ target: { value } }) => {
+              try {
+                const sanitizedInput = validateInput(value);
+                setName(sanitizedInput);
+                setErrorMessage('');
+              } catch (error) {
+                setErrorMessage(
+                  (error as Error)?.message ||
+                    'Oops! Please try a different name.'
+                );
+              }
+            }}
+            placeholder='e.g. "Princess Sparkle"'
+          />
+        </div>
       ),
     },
     {
